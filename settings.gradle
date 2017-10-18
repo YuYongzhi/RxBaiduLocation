@@ -1,1 +1,1 @@
-include ':app', ':rxlocation'
+include ':app', ':rxlocation', ':baidu-map', ':baidu-location'

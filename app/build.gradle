@@ -1,14 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "25.0.3"
+    signingConfigs {    //签名设置
+        release {
+            storeFile file('../baidu.jks')
+            storePassword "123456"
+            keyAlias "baidu"
+            keyPassword "123456"
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.kevin.demo"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.release
     }
     buildTypes {
         release {
@@ -16,10 +25,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile project(':baidu-location')
 }
