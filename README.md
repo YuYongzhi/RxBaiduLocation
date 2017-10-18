@@ -1,2 +1,0 @@
-# RxBaiduLocation
-RxBaiduLocation
